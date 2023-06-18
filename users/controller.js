@@ -31,6 +31,23 @@ const findAll = async (req, res, next) => {
   } catch (err) {}
 };
 
+const findOne = (req, res, next) => {
+  try {
+    User.findById(req.params.id)
+      .then((user) => {
+        if (!user) {
+          return res.status(404).send("User not found");
+        }
+        req.user = user;
+        next();
+      })
+      .catch((err) => {
+        console.error(err);
+        return res.status(500).send("Error retrieving user");
+      });
+  } catch (err) {}
+};
+
 const update = async (req, res, next) => {
   try {
     User.findByIdAndUpdate(

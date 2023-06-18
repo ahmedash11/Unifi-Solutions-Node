@@ -30,4 +30,10 @@ router.delete("/:id", controller.destroyPipeline, (req, res) => {
   });
 });
 
+router.get("/:id", controller.findOnePipeline, (req, res) => {
+  res.status(200).json({
+    user: req.user,
+  });
+});
+
 module.exports = router;
